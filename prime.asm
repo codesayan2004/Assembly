@@ -6,11 +6,11 @@ section .data
     msg_prime db "Prime Number: ",10,0
     msg_comp db "Composite Number: ",10,0
     msg_fact db "Factors are :",10,0
-    msg_num db "%d "
+    msg_num db "%d ",0
     fmt_in db "%d",0
     msg db "cnt = %d",10,0
     cnt dd 0
-    newline db 10
+    newline db 10,0
 
 section .bss
     n resd 1
@@ -46,11 +46,12 @@ loop_prime:
     jne loop_prime
     inc dword [cnt]
 
+    dec esi
     push esi
     push msg_num
     call printf
     add esp, 8
-
+    inc esi
     jmp loop_prime
 
 finish:
